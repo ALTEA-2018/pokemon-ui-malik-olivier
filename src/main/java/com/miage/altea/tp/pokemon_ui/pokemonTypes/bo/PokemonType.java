@@ -1,8 +1,9 @@
 package com.miage.altea.tp.pokemon_ui.pokemonTypes.bo;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PokemonType {
+public class PokemonType implements Serializable {
     private int id;
     private int baseExperience;
     private int height;
