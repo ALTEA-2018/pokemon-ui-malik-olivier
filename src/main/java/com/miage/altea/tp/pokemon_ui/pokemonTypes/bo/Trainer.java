@@ -9,6 +9,8 @@ public class Trainer implements Serializable {
 
     private List<Pokemon> team;
 
+    private String password;
+
     public Trainer(String name) {
         this.name = name;
     }
@@ -30,5 +32,13 @@ public class Trainer implements Serializable {
 
     public void setTeam(List<Pokemon> team) {
         this.team = team;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -4,6 +4,7 @@ import com.miage.altea.tp.pokemon_ui.pokemonTypes.bo.Trainer;
 import com.miage.altea.tp.pokemon_ui.pokemonTypes.service.PokemonTypeService;
 import com.miage.altea.tp.pokemon_ui.pokemonTypes.service.TrainerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.retry.annotation.Retryable;
@@ -33,7 +34,14 @@ public class TrainerServiceImpl implements TrainerService {
         return trainersList;
     }
 
+    @Override
+    public Trainer getTrainer(String name) {
+        var trainer = restTemplate.getForObject(trainerServiceUrl+"/trainers/{name}",Trainer.class,name);
+        return trainer;
+    }
+
     @Autowired
+    @Qualifier("trainerApiRestTemplate")
     public void setRestTemplate(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
