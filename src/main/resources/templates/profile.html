@@ -1,30 +1,31 @@
 {{> layout/header}}
 {{> layout/navbar}}
 
-
 <body>
 
+
 <div class="container">
-    <h1 class="pt-md-5 pb-md-5">Pokedex</h1>
+    <h1 class="pt-md-5 pb-md-5">{{trainer.name}}</h1>
 
     <div class="card-deck">
-        {{#pokemonTypes}}
+        {{#trainer.team}}
         <div class="col-md-3">
             <div class="card shadow-sm mb-3">
                 <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">{{name}} <!--2--><span class="badge badge-secondary">Id {{id}} <!--3--></span></h4>
+                    <h4 class="my-0 font-weight-normal">{{type.name}} <!--2--><span class="badge badge-secondary">Id {{type.id}}
+                        <!--3--></span></h4>
                 </div>
                 <div id="carousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators" >
+                    <ol class="carousel-indicators">
                         <li style="background: black" data-target=".carousel" data-slide-to="0" class="active"></li>
                         <li style="background: black" data-target=".carousel" data-slide-to="1"></li>
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100"  src="{{sprites.front_default}}" alt="Pokemon"/>
+                            <img class="d-block w-100" src="{{type.sprites.front_default}}" alt="Pokemon"/>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100"  src="{{sprites.back_default}}" alt="Pokemon"/>
+                            <img class="d-block w-100" src="{{type.sprites.back_default}}" alt="Pokemon"/>
                         </div>
                     </div>
                     <a class="carousel-control-prev" style="background: black" href="#carousel" data-slide="prev">
@@ -35,19 +36,19 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <span class="badge badge-primary">Speed : {{stats.speed}}</span>
-                    <span class="badge badge-primary">Attack : {{stats.attack}}</span>
-                    <span class="badge badge-primary">Defense : {{stats.defense}}</span>
-                    <span class="badge badge-primary">HP : {{stats.hp}}</span>
+                    <span class="badge badge-primary">Speed : {{type.stats.speed}}</span>
+                    <span class="badge badge-primary">Attack : {{type.stats.attack}}</span>
+                    <span class="badge badge-primary">Defense : {{type.stats.defense}}</span>
+                    <span class="badge badge-primary">HP : {{type.stats.hp}}</span>
                 </div>
                 <div class="card-body">
                     {{#types}}
-                        <span class="badge badge-secondary">{{this}}</span>
+                    <span class="badge badge-secondary">{{this}}</span>
                     {{/types}}
                 </div>
             </div>
         </div>
-        {{/pokemonTypes}}
+        {{/trainer.team}}
     </div>
 
 </div>
