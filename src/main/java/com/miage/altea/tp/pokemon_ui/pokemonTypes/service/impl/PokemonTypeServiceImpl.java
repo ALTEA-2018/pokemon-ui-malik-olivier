@@ -5,6 +5,10 @@ import com.miage.altea.tp.pokemon_ui.pokemonTypes.service.PokemonTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,7 +25,10 @@ public class PokemonTypeServiceImpl implements PokemonTypeService {
     @Retryable
     @Override
     public List<PokemonType> listPokemonsTypes() {
-        var pokemons = restTemplate.getForObject(pokemonServiceUrl+"/pokemon-types/",PokemonType[].class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAcceptLanguageAsLocales(List.of(LocaleContextHolder.getLocale()));
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        PokemonType[] pokemons = restTemplate.exchange(pokemonServiceUrl + "/pokemon-types/", HttpMethod.GET, entity, PokemonType[].class).getBody();
         return Arrays.asList(pokemons);
     }
 
